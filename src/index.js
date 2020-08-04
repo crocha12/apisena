@@ -1,13 +1,13 @@
 const puppeteer = require('puppeteer');
 
 let found = async (jogo, sorteio) => {
-  const browser = await puppeteer.launch({headless: false})
+  const browser = await puppeteer.launch()
   const page = await browser.newPage();
   await page.goto(`https://www.loterianacional.com.br/resultado-${jogo}`)
 
   await page.type('#main div form div.col-md-3 input.form-control', `${sorteio}`);
   await page.keyboard.press('Enter')
-  await page.waitFor(1000);
+  await page.waitFor(3000);
 
   const result = await page.evaluate(() => {
     const numbers = [];
